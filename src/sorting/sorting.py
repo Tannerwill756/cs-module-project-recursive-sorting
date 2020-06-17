@@ -7,7 +7,7 @@ def merge(arrA, arrB):
     i = 0
     j = 0
     k = 0
-    while i < len(arrA) and j < len(arrB):
+    while len(arrA) > 0 and len(arrB) > 0:
         if arrA[i] < arrB[j]:
             merged_arr[k] = arrA[i]
             k = k + 1
@@ -17,41 +17,39 @@ def merge(arrA, arrB):
             k = k + 1
             j = j + 1
 
-    while i < len(arrA):
+    while 0 < len(arrA):
         merged_arr[k] = arrA[i]
         k = k + 1
         i = i + 1
 
-    while j < len(arrB):
+    while 0 < len(arrB):
         merged_arr[k] = arrA[j]
         k = k + 1
         j = j + 1
 
-    return merged_arr
+    print(merged_arr)
 
 # TO-DO: implement the Merge Sort function below recursively
 
 
-# arrA = [5, 7, 9, 11, 13]
-# arrB = [2, 6, 10, 12, 15]
-# merge(arrA, arrB)
+arrA = [5, 7, 9, 11, 13]
+arrB = [2, 6, 10, 12, 15]
+merge(arrA, arrB)
 
 
 def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        L = arr[:mid]
-        R = arr[mid:]
+    if len(arr) <= 1:
+        return arr
 
-        merge_sort(L)
-        merge_sort(R)
-        return merge(L, R)
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
 
-    return arr
+    return merge(left, right)
 
 
-scary_Array = [6, 7, 5, 2, 1, 15, 13, 10]
-merge_sort(scary_Array)
+# scary_Array = [6, 7, 5, 2, 1, 15, 13, 10]
+# merge_sort(scary_Array)
 
 # STRETCH: implement the recursive logic for merge sort in a way that doesn't
 # utilize any extra memory
